@@ -1,0 +1,54 @@
+CONNECTION STRINGS
+    "Data Source=;Initial Catalog=;User ID=;Password=;"
+    "Data Source=;Initial Catalog=;Trusted_Connection=True;"
+
+LIST ALL TABLES IN SELECTED DATABASE
+    select * from information_schema.tables where table_type = 'base table'
+
+LIST ALL COLUMNS IN SELECTED TABLE
+    select * from information_schema.columns where table_name = '{table_name}'
+
+LIST INFO IN STORE PROCEDURE
+    exec sp_describe_first_result_set N'{store_name}'
+
+LIST STORE PROCEDURE'S CONTENT
+    exec sp_helptext '{store_name}'
+
+SHOW RELATED TABLES
+    declare @TableName varchar(100) = '{table_name}'
+
+    -- PK
+    exec sp_pkeys @TableName
+
+    -- FK
+    exec sp_fkeys @TableName
+
+    -- References
+    select obj.name as fk_name,
+    sch.name as [schema_name],
+    tab1.name as [table],
+    col1.name as [column],
+    tab2.name as [referenced_table],
+    col2.name as [referenced_column]
+    from sys.foreign_key_columns fkc
+    inner join sys.objects obj
+    on obj.object_id = fkc.constraint_object_id
+    inner join sys.tables tab1
+    on tab1.object_id = fkc.parent_object_id
+    inner join sys.schemas sch
+    on tab1.schema_id = sch.schema_id
+    inner join sys.columns col1
+    on col1.column_id = parent_column_id and col1.object_id = tab1.object_id
+    inner join sys.tables tab2
+    on tab2.object_id = fkc.referenced_object_id
+    inner join sys.columns col2
+    on col2.column_id = referenced_column_id and col2.object_id = tab2.object_id
+    where tab1.name = @TableName
+
+PREPARING DATA
+    select
+    concat('insert into {table_name}(column1, column2, column3, column4, column5, column6, column7)
+    values(''',a.,''',''',a.,''',''',a.,''',''',a.,''',''',a.,''',''',b.,''',''',a.,''')')
+    from
+    {table_name} as a
+    join {table_name} as b on a. = b.

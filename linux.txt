@@ -1,0 +1,193 @@
+---------- HELP ----------
+
+HELP INFO
+    man {command_name}
+    whatis {command_name}
+
+---------- GENERAL ----------
+
+SYSTEM INFO
+    hostnamectl
+
+SET ALIAS
+    nano ~/.bashrc
+
+RUN BASH|EXECUTABLE FILE
+    ./{file_name}
+    bash {file_name}
+
+DELETE TERMINAL'S HISTORIES
+    history -c && history -w
+
+SETTING AUTO-COMPLETION CASE-INSENSITIVE
+    echo "bind 'set completion-ignore-case on'" >> ~/.bashrc
+
+---------- DEVICE ----------
+
+SHOW MOUNTED BLOCK DEVICES
+    df -ht ext4
+
+SHOW CONNECTED DEVICES THROUGH USB/PCI
+    lsusb/lspci
+
+---------- FILE|FOLDER|TEXT ----------
+
+SHOW LIST FILES & FOLDERS WITH ITS PERMISSION (BASE ON CURRENT USER & GROUP & OTHER)
+    ls -a|-l|-dl|-lah {file_name}|{folder_name}
+
+SHOW FILE'S CONTENT
+    cat|less {file_name}
+
+SHOW LIMITED FILE'S CONTENT
+    head|tail -n {limit} {file_name}
+
+CREATE FILE
+    touch {file_name}
+
+CREATE FOLDER
+    mkdir {folder_name}
+
+CREATE|EDIT FILE'S CONTENT
+    nano {file_name}
+
+REMOVE FILE
+    rm -r {file_name}
+
+REMOVE FOLDER
+    rmdir {folder_name} (folder should be empty)
+    rm -rf {folder_name} (force remove all children)
+
+COPY|MOVE FILE
+    cp|mv {file_name} {destination_folder_name}/
+
+SEARCH FILE (run updatedb to index new files/folders)
+    locate {file_name}
+
+SEARCH TEXT
+    grep -r {text}
+
+SORT TEXT
+    cat {file_name} | sort -n|-rn
+
+BUNDLE/DEBUNDLE FOLDER
+    tar xzf {folder_name}.tar.gz
+    tar czf {folder_name}
+
+COMPRESS|DECOMPRESS FOLDER
+    zip {zip_name} {folder_name}
+    unzip {zip_name}
+
+COPY SELECTED TEXT TO OTHER FILE (> will override file; >> will append to the end)
+    cat {file_name} | grep {search_text} >> {new_file_name}
+
+SHOW CURRENT WORK FOLDER
+    pwd
+
+SHOW FILE'S PATH
+    readlink -f {file_name}
+
+WORDS COUNT
+    wc {file_name}
+    ps -aux | wc
+
+COPY FILE'S TEXT
+    xclip -selection clipboard < {file_name}
+
+---------- APP ----------
+
+SHOW INSTALLED REPOSITORIES
+    grep -rhE ^deb /etc/apt/sources.list*
+
+SHOW INSTALLED APPS
+    apt list --installed | grep {program_name}
+
+INSTALL|UNINSTALL PACKAGES
+    apt-get install {package_name}
+    apt-get remove {package_name}
+
+INSTALL .DEB PACKAGES
+    dpkg -i {package_name}.deb
+
+---------- PROCESS ----------
+
+SHOW OPENED PORTS
+    netstat -l|tulnp
+
+SHOW MEM STATUS
+    free -h
+
+SHOW PROCESS USAGE
+    top
+
+SHOW ALL RUNNING PROCESSES
+    ps -aux --sort -pcpu|-pmem
+
+KILL PROCESS
+    pkill {process_name}
+    kill -9 {process_id}
+
+MANIPULATE STARTUP PROCESS
+    systemctl enable|disable|start|restart|stop {process_name}
+
+---------- NETWORKING ----------
+
+SHOW MAC
+    ipconfig
+
+SHOW IP|DG
+    ip address show
+    ip route show
+
+RESOLVE DOMAIN NAME
+    nslookup {domain_name}
+    host {domain_name}
+
+REMOTE TELNET|SSH
+    telnet {ip}
+    ssh {username}@{ip}
+
+---------- USER|GROUP|PERMISSION ----------
+
+SHOW ALL USERS
+    cat /etc/passwd
+
+SHOW PERMISSION INFO
+    id {username}
+
+SHOW CURRENT LOGED-IN USERS
+    who|w
+
+SHOW ALL SYSTEM LOGED-IN A MONTH
+    last
+
+CREATE NEW USER
+    useradd -m {username}
+
+SET PASSWORD
+    passwd {username}
+
+SWITCH USER
+    su {username}
+
+CREATE NEW GROUP
+    groupadd {group_name}
+
+SET FOLDER'S PERMISSION FOR GROUP
+    chown :{group_name} {folder_name}
+
+ADD USER TO GROUP
+    usermod -a -G {group_name} {username}
+
+CHANGE GROUP PERMISSION ON FOLDER (WRITE)
+    chmod g+w {folder_name}
+
+CHANGE USERNAME
+    usermod -l {new_username} {old_username}
+
+---------- SCAN ----------
+
+SCAN LOCAL DEVICES
+    nmap -sn {default_gateway}/{subnet_mask}
+
+SCAN PORTS ON DOMAIN
+    nmap -v -sT {domain_name}

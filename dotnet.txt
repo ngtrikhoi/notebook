@@ -1,0 +1,2 @@
+PUBLISH
+    dotnet publish --framework netcoreapp3.1

@@ -1,0 +1,7 @@
+PACKAGES
+    srvadmin-hapi_9.3.0_amd64.deb
+    command-configure_4.4.0-86.ubuntu18_amd64.deb
+
+COMMANDS
+    /opt/dell/dcc/cctk --primarybatterycfg=custom:50-85
+    find /sys/class/power_supply/BAT0/ -type f | xargs -tn1 cat
